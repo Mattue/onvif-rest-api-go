@@ -1,0 +1,9 @@
+version: "3.5"
+
+services:
+  onvif-rest-api:
+    image: onvif-rest-api-go:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - GIN_MODE=release

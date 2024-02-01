@@ -89,9 +89,10 @@ Should be POST with corresponding JSON body, but Nightbot can't do POST's
 
 ```
 GET /v1/:camera/goto-preset?profile-token=***&
-                                    speed-x=***&
-                                    speed-y=***&
-                                    speed-zoom=***
+                            preset-token=***&
+                            speed-x=***&
+                            speed-y=***&
+                            speed-zoom=***
 ```
 
 ---

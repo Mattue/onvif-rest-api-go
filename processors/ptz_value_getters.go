@@ -11,9 +11,8 @@ import (
 
 func getService(context *gin.Context) onvif_wsdl2go.PTZ {
 
-	//TODO cam to url mapping
-	//client := soap.NewClient(camUrl,
-	client := soap.NewClient(os.Getenv("API_URL"),
+	//TODO check if os env does not exist
+	client := soap.NewClient(os.Getenv(context.Param("camera")),
 		soap.WithTimeout(time.Second*5),
 	)
 

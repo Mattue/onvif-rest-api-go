@@ -4,6 +4,7 @@ import (
 	"encoding/xml"
 	"github.com/gin-gonic/gin"
 	"log"
+	"mattue/onif-rest-api-go/errorsProcessors"
 	"mattue/onif-rest-api-go/onvif_wsdl2go"
 	"net/http"
 )
@@ -23,9 +24,8 @@ func AbsoluteMove(context *gin.Context) {
 	})
 
 	if err != nil {
-		log.Println(err)
 		//TODO error parse
-		context.IndentedJSON(http.StatusInternalServerError, "{err:err}")
+		context.IndentedJSON(http.StatusInternalServerError, errorsProcessors.BuildError("000", err))
 		return
 	}
 
@@ -41,9 +41,8 @@ func GetConfigurations(context *gin.Context) {
 	reply, err := service.GetConfigurations(&onvif_wsdl2go.GetConfigurations{})
 
 	if err != nil {
-		log.Println(err)
 		//TODO error parse
-		context.IndentedJSON(http.StatusInternalServerError, "{err:err}")
+		context.IndentedJSON(http.StatusInternalServerError, errorsProcessors.BuildError("000", err))
 		return
 	}
 
@@ -65,9 +64,7 @@ func GetPresets(context *gin.Context) {
 	})
 
 	if err != nil {
-		log.Println(err)
-		//TODO error parse
-		context.IndentedJSON(http.StatusInternalServerError, "{err:err}")
+		context.IndentedJSON(http.StatusInternalServerError, errorsProcessors.BuildError("000", err))
 		return
 	}
 
@@ -90,9 +87,7 @@ func GotoHomePosition(context *gin.Context) {
 	})
 
 	if err != nil {
-		log.Println(err)
-		//TODO error parse
-		context.IndentedJSON(http.StatusInternalServerError, "{err:err}")
+		context.IndentedJSON(http.StatusInternalServerError, errorsProcessors.BuildError("000", err))
 		return
 	}
 
@@ -118,9 +113,7 @@ func GotoPreset(context *gin.Context) {
 	})
 
 	if err != nil {
-		log.Println(err)
-		//TODO error parse
-		context.IndentedJSON(http.StatusInternalServerError, "{err:err}")
+		context.IndentedJSON(http.StatusInternalServerError, errorsProcessors.BuildError("000", err))
 		return
 	}
 
@@ -143,9 +136,7 @@ func GetPresetTours(context *gin.Context) {
 	})
 
 	if err != nil {
-		log.Println(err)
-		//TODO error parse
-		context.IndentedJSON(http.StatusInternalServerError, "{err:err}")
+		context.IndentedJSON(http.StatusInternalServerError, errorsProcessors.BuildError("000", err))
 		return
 	}
 

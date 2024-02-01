@@ -48,13 +48,13 @@ func getPosition(context *gin.Context) (position onvifGoDefinitions.PTZVector) {
 
 func getPanTilt(context *gin.Context, prefix string) (vector onvifGoDefinitions.Vector2D) {
 
-	x, err := strconv.ParseFloat(context.Query(prefix+"_x"), 32)
+	x, err := strconv.ParseFloat(context.Query(prefix+"-x"), 32)
 
 	if err != nil {
 		//TODO
 	}
 
-	y, err := strconv.ParseFloat(context.Query(prefix+"_y"), 32)
+	y, err := strconv.ParseFloat(context.Query(prefix+"-y"), 32)
 
 	if err != nil {
 		//TODO
@@ -70,7 +70,7 @@ func getPanTilt(context *gin.Context, prefix string) (vector onvifGoDefinitions.
 }
 
 func getZoom(context *gin.Context, prefix string) (zoom onvifGoDefinitions.Vector1D) {
-	zoomValue, err := strconv.ParseFloat(context.Query(prefix+"_zoom"), 32)
+	zoomValue, err := strconv.ParseFloat(context.Query(prefix+"-zoom"), 32)
 
 	if err != nil {
 		//TODO

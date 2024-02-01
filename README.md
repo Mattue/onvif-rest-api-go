@@ -120,3 +120,9 @@ https://service.host/v1/prod/***
 * Response body from ONVIF parsing
 * Error descriptions and correct error codes
 * HTTP error code transparency
+
+# TODO
+
+* error on wrong endpoint
+* log backend requests
+* forward backend http codes

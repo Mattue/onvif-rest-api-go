@@ -3,7 +3,7 @@ package main
 import (
 	"github.com/gin-gonic/gin"
 	"log"
-	"mattue/onif-rest-api-go/processors"
+	"mattue/onif-rest-api-go/processors/ptz"
 )
 
 func main() {
@@ -12,14 +12,14 @@ func main() {
 	version := "v1"
 
 	//should be POST
-	router.GET("/"+version+"/:camera/absolute-move", ptz_request_processors.AbsoluteMove)
-	router.GET("/"+version+"/:camera/get-configurations", ptz_request_processors.GetConfigurations)
-	router.GET("/"+version+"/:camera/get-presets", ptz_request_processors.GetPresets)
-	router.GET("/"+version+"/:camera/get-preset-tours", ptz_request_processors.GetPresetTours)
+	router.GET("/"+version+"/:camera/absolute-move", ptz.AbsoluteMove)
+	router.GET("/"+version+"/:camera/get-configurations", ptz.GetConfigurations)
+	router.GET("/"+version+"/:camera/get-presets", ptz.GetPresets)
+	router.GET("/"+version+"/:camera/get-preset-tours", ptz.GetPresetTours)
 	//should be POST
-	router.GET("/"+version+"/:camera/goto-home-position", ptz_request_processors.GotoHomePosition)
+	router.GET("/"+version+"/:camera/goto-home-position", ptz.GotoHomePosition)
 	//should be POST
-	router.GET("/"+version+"/:camera/goto-preset", ptz_request_processors.GotoPreset)
+	router.GET("/"+version+"/:camera/goto-preset", ptz.GotoPreset)
 
 	err := router.Run("0.0.0.0:8080")
 	if err != nil {

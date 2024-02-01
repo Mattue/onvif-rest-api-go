@@ -1,44 +1,44 @@
-package ptz_request_processors
+package ptz
 
 import (
 	"github.com/gin-gonic/gin"
 	"github.com/hooklift/gowsdl/soap"
-	"mattue/onif-rest-api-go/onvif_wsdl2go"
+	"mattue/onif-rest-api-go/onvifGoDefinitions"
 	"os"
 	"strconv"
 	"time"
 )
 
-func getService(context *gin.Context) onvif_wsdl2go.PTZ {
+func getService(context *gin.Context) onvifGoDefinitions.PTZ {
 
 	//TODO check if os env does not exist
 	client := soap.NewClient(os.Getenv(context.Param("camera")),
 		soap.WithTimeout(time.Second*5),
 	)
 
-	service := onvif_wsdl2go.NewPTZ(client)
+	service := onvifGoDefinitions.NewPTZ(client)
 
 	return service
 }
 
-func getPresetToken(context *gin.Context) (presetToken onvif_wsdl2go.ReferenceToken) {
+func getPresetToken(context *gin.Context) (presetToken onvifGoDefinitions.ReferenceToken) {
 	//TODO if preset-token is not provided
-	presetToken = onvif_wsdl2go.ReferenceToken(context.Query("preset-token"))
+	presetToken = onvifGoDefinitions.ReferenceToken(context.Query("preset-token"))
 	return
 }
 
-func getProfileToken(context *gin.Context) (profileToken onvif_wsdl2go.ReferenceToken) {
+func getProfileToken(context *gin.Context) (profileToken onvifGoDefinitions.ReferenceToken) {
 	//TODO if profile-token is not provided
-	profileToken = onvif_wsdl2go.ReferenceToken(context.Query("profile-token"))
+	profileToken = onvifGoDefinitions.ReferenceToken(context.Query("profile-token"))
 	return
 }
 
-func getPosition(context *gin.Context) (position onvif_wsdl2go.PTZVector) {
+func getPosition(context *gin.Context) (position onvifGoDefinitions.PTZVector) {
 
 	panTilt := getPanTilt(context, "position")
 	zoom := getZoom(context, "position")
 
-	position = onvif_wsdl2go.PTZVector{
+	position = onvifGoDefinitions.PTZVector{
 		PanTilt: &panTilt,
 		Zoom:    &zoom,
 	}
@@ -46,7 +46,7 @@ func getPosition(context *gin.Context) (position onvif_wsdl2go.PTZVector) {
 	return
 }
 
-func getPanTilt(context *gin.Context, prefix string) (vector onvif_wsdl2go.Vector2D) {
+func getPanTilt(context *gin.Context, prefix string) (vector onvifGoDefinitions.Vector2D) {
 
 	x, err := strconv.ParseFloat(context.Query(prefix+"_x"), 32)
 
@@ -60,7 +60,7 @@ func getPanTilt(context *gin.Context, prefix string) (vector onvif_wsdl2go.Vecto
 		//TODO
 	}
 
-	vector = onvif_wsdl2go.Vector2D{
+	vector = onvifGoDefinitions.Vector2D{
 		X:     float32(x),
 		Y:     float32(y),
 		Space: "",
@@ -69,14 +69,14 @@ func getPanTilt(context *gin.Context, prefix string) (vector onvif_wsdl2go.Vecto
 	return
 }
 
-func getZoom(context *gin.Context, prefix string) (zoom onvif_wsdl2go.Vector1D) {
+func getZoom(context *gin.Context, prefix string) (zoom onvifGoDefinitions.Vector1D) {
 	zoomValue, err := strconv.ParseFloat(context.Query(prefix+"_zoom"), 32)
 
 	if err != nil {
 		//TODO
 	}
 
-	zoom = onvif_wsdl2go.Vector1D{
+	zoom = onvifGoDefinitions.Vector1D{
 		X:     float32(zoomValue),
 		Space: "",
 	}
@@ -84,12 +84,12 @@ func getZoom(context *gin.Context, prefix string) (zoom onvif_wsdl2go.Vector1D) 
 	return
 }
 
-func getSpeed(context *gin.Context) (speed onvif_wsdl2go.PTZSpeed) {
+func getSpeed(context *gin.Context) (speed onvifGoDefinitions.PTZSpeed) {
 
 	panTilt := getPanTilt(context, "speed")
 	zoom := getZoom(context, "speed")
 
-	speed = onvif_wsdl2go.PTZSpeed{
+	speed = onvifGoDefinitions.PTZSpeed{
 		PanTilt: &panTilt,
 		Zoom:    &zoom,
 	}

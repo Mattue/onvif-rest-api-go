@@ -1,4 +1,4 @@
-package onvif_wsdl2go
+package onvifGoDefinitions
 
 import (
 	"context"

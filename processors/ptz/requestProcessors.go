@@ -1,11 +1,11 @@
-package ptz_request_processors
+package ptz
 
 import (
 	"encoding/xml"
 	"github.com/gin-gonic/gin"
 	"log"
 	"mattue/onif-rest-api-go/errorsProcessors"
-	"mattue/onif-rest-api-go/onvif_wsdl2go"
+	"mattue/onif-rest-api-go/onvifGoDefinitions"
 	"net/http"
 )
 
@@ -16,7 +16,7 @@ func AbsoluteMove(context *gin.Context) {
 	position := getPosition(context)
 	speed := getSpeed(context)
 
-	reply, err := service.AbsoluteMove(&onvif_wsdl2go.AbsoluteMove{
+	reply, err := service.AbsoluteMove(&onvifGoDefinitions.AbsoluteMove{
 		XMLName:      xml.Name{},
 		ProfileToken: &profileToken,
 		Position:     &position,
@@ -38,7 +38,7 @@ func AbsoluteMove(context *gin.Context) {
 func GetConfigurations(context *gin.Context) {
 	service := getService(context)
 
-	reply, err := service.GetConfigurations(&onvif_wsdl2go.GetConfigurations{})
+	reply, err := service.GetConfigurations(&onvifGoDefinitions.GetConfigurations{})
 
 	if err != nil {
 		//TODO error parse
@@ -58,7 +58,7 @@ func GetPresets(context *gin.Context) {
 
 	profileToken := getProfileToken(context)
 
-	reply, err := service.GetPresets(&onvif_wsdl2go.GetPresets{
+	reply, err := service.GetPresets(&onvifGoDefinitions.GetPresets{
 		XMLName:      xml.Name{},
 		ProfileToken: &profileToken,
 	})
@@ -80,7 +80,7 @@ func GotoHomePosition(context *gin.Context) {
 	profileToken := getProfileToken(context)
 	speed := getSpeed(context)
 
-	var reply, err = service.GotoHomePosition(&onvif_wsdl2go.GotoHomePosition{
+	var reply, err = service.GotoHomePosition(&onvifGoDefinitions.GotoHomePosition{
 		XMLName:      xml.Name{},
 		ProfileToken: &profileToken,
 		Speed:        &speed,
@@ -105,7 +105,7 @@ func GotoPreset(context *gin.Context) {
 	presetToken := getPresetToken(context)
 	speed := getSpeed(context)
 
-	reply, err := service.GotoPreset(&onvif_wsdl2go.GotoPreset{
+	reply, err := service.GotoPreset(&onvifGoDefinitions.GotoPreset{
 		XMLName:      xml.Name{},
 		ProfileToken: &profileToken,
 		PresetToken:  &presetToken,
@@ -130,7 +130,7 @@ func GetPresetTours(context *gin.Context) {
 
 	profileToken := getProfileToken(context)
 
-	reply, err := service.GetPresetTours(&onvif_wsdl2go.GetPresetTours{
+	reply, err := service.GetPresetTours(&onvifGoDefinitions.GetPresetTours{
 		XMLName:      xml.Name{},
 		ProfileToken: &profileToken,
 	})
